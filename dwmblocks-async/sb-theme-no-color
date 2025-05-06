@@ -11,6 +11,9 @@ display() {
             *) color=15 ;;
         esac
     fi
-    echo "^C$color^$1"
-}
 
+    case "$STATUSBAR" in
+        dwmblocks) echo "^C$color^$1" ;;
+        *) echo "$1" ;;
+    esac
+}
