@@ -1,0 +1,24 @@
+#!/bin/sh
+
+case "$BLOCK_BUTTON" in
+    6) terminal -e "$EDITOR" "$0" ;;
+esac
+
+. /home/frodelian/Downloads/dwmblocks-async/sb-theme
+
+if command -v xkb-switch >/dev/null 2>&1; then
+    layout="$(xkb-switch -p)"
+else
+    layout="$(setxkbmap -query | awk '/layout:/ {print $2}')"
+    current_group="$(xkblayout-state print %n 2>/dev/null || echo 0)"
+    layout="$(echo $layout | cut -d',' -f$((current_group+1)))"
+fi
+
+case "$layout" in
+    ru|Russian|рус|russia|RU) icon="RU" ;;
+    en|us|EN|US|English|англ|eng) icon="EN" ;;
+    *) icon="$layout" ;;
+esac
+
+display "$icon" "$color"
+

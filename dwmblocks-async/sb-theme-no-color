@@ -1,0 +1,16 @@
+display() {
+    if [ -n "$2" ]; then
+        color="$2"
+    else
+        case "$(basename "$0")" in
+	    sb-kb) color=10 ;;
+	    sb-memory) color=13 ;;
+	    sb-volume) color=14 ;;
+            sb-battery) color=11 ;;
+	    sb-date) color=12 ;;
+            *) color=15 ;;
+        esac
+    fi
+    echo "^C$color^$1"
+}
+
